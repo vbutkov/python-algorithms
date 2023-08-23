@@ -6,31 +6,44 @@ def generate_alphabet():
     return alphabet
 
 
-def crypt(data, alphabet):
-    data_crypt = ""
+def crypt2(data, alphabet, offset):
+    result = ""
     for ch in data:
         position = alphabet.find(ch)
-        data_crypt += alphabet[(position + 1) % len(alphabet)]
+        result += alphabet[(position + offset) % len(alphabet)]
 
-    return data_crypt
+    return result
 
 
-def decrypt(data, alphabet):
-    data_decrypt = ""
-    for ch in data:
-        position = alphabet.find(ch)
-        data_decrypt += alphabet[(position - 1) % len(alphabet)]
+def decrypt2(data, alphabet, offset):
+    return crypt2(data, alphabet, -offset)
 
-    return data_decrypt
 
+# def crypt(data, alphabet):
+#     data_crypt = ""
+#     for ch in data:
+#         position = alphabet.find(ch)
+#         data_crypt += alphabet[(position + 1) % len(alphabet)]
+#
+#     return data_crypt
+#
+#
+# def decrypt(data, alphabet):
+#     data_decrypt = ""
+#     for ch in data:
+#         position = alphabet.find(ch)
+#         data_decrypt += alphabet[(position - 1) % len(alphabet)]
+#
+#     return data_decrypt
+#
 
 def cipher_cesar(data):
     alphabet = generate_alphabet()
 
-    data_crypt = crypt(data, alphabet)
+    data_crypt = crypt2(data, alphabet, 56)
     print(data_crypt)
 
-    data_decrypt = decrypt(data_crypt, alphabet)
+    data_decrypt = decrypt2(data_crypt, alphabet, 56)
     print(data_decrypt)
 
 
